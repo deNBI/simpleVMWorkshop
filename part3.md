@@ -35,16 +35,19 @@ in order to inspect and visualize our results.
    `Tools` -> `Terminal` -> `New Terminal`.
 
 3. Download the Script by running wget:
+   ```
+   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/analyse.Rmd
+   ```   
    
-   
-1. You might have to install markdown as indicated by the warning in the upper
+4. You might have to install markdown as indicated by the warning in the upper
    part of the editor. Just click on `install`.
-2. Further you have to install the necessary libraries: 
+
+5. Further you have to install the necessary libraries: 
    ```
    install.packages(c("ggplot2"))
    install.packages(c("RColorBrewer"))
    ```
-3. You can now run the R notebook.
+6. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
 
 ### 3.3 VSCode
 
