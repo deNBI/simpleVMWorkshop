@@ -129,3 +129,5 @@ Please use your initial letters (Example: Max Mustermann -> mm)
 The upload of your snapshot might take a few minutes.
 
 ![](figures/snapshot.png)
+
+Continue with [Part 2](part2.md)
