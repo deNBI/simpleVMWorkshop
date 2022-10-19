@@ -61,6 +61,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    ```
    htop
    ```
+   Exit `htop` by typing `q` or `F10`.
 
 4. Use the conda environment by running `conda activate denbi`.
 
