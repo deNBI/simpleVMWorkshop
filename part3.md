@@ -7,25 +7,39 @@ this snapshot with a larger flavor.
 Further, we will search for more metagenomic datasets via object storage
 and scale up our analysis by providing more cores to mash.
 
-### 3.1 Create a snapshot and a new VM
+### 3.1 Create a new VM based on your snapshot
 
-1. Navigate to the `New Instance` tab (and select the SimpleVMRMU project).
+1. Click on `Overviews` -> `Snapshots` in left menu and check which status
+   your snapshot has. You can also filter of the name in the top menu. 
+   If it has the status `active`, you can 
+   navigate to the `New Instance` tab (and select the SimpleVMRMU project).
 
-2. Create a VM based on your snapshot with the **de.NBI small** flavor
-   which has more cores. Click on the Snapshot tab to select your snapshot.
+2. Provide again a name for your instance.
+3. In the flavors sections please choose the **de.NBI small** flavor which has more cores than **de.NBI default**. 
+   Click on the Snapshot tab to select your snapshot.
    ![](figures/startsnap.png)
 
-3. Please create a volume for your VM and as set your 
-   initial letters (Example: Max Mustermann -> mm) as volume name. 
-   Use `/vol/data` as mountpath and provide 1 GB as the storage size.
+4. Please create a volume for your VM and enter your name without whitespace 
+   (Example: Max Mustermann -> MaxMusterman) as the volume name. 
+   Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
+   ![](figures/createVolume.png)
+
+5. Click on Start!
 
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 
-1. Click on `Terminal` in the upper menu and select `New Terminal`.
+1. You are now on the `Instance Overview` page. You can delete your old VM which
+   we used to create your snapshot. On your new VM, please click on `how to connect`.
+   You should see again a link. Please click on the link to open Theia-IDE on a new
+   browser tab.
+   ![](figures/howtoconnect.png)
 
-2. Activate the conda environment by running `conda activate denbi`.
+2. Click on `Terminal` in the upper menu and select `New Terminal`.
+   ![](figures/terminal.png)
 
-3. Unfortunately, conda does not offer a minio cli binary,
+3. Activate the conda environment by running `conda activate denbi`.
+
+4. Unfortunately, conda does not offer a minio cli binary,
    which means that we would have to install it manually.
    Download the binary:
    ```
@@ -40,27 +54,28 @@ and scale up our analysis by providing more cores to mash.
    chmod a+x /usr/local/bin/mc
    ```
 
-4. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
+5. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
    ```
    mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
    ```
 
-5. List which files are available for SRA number `SRR3984908`:
+6. List which files are available for SRA number `SRR3984908`:
    ```
    mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-6. Check the size of these files
+7. Check the size of these files
    ```
    mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-7. You can read the first lines of these files by using `mc cat`.
+8. You can read the first lines of these files by using `mc cat`.
    ```
    mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
    ```
 
-8. Search for SRA run accessions we want to analyse and check their size.
+9. Search for SRA run accessions we want to analyse and check their size
+   (this may take a while to complete):
    ```
    mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
       |  jq -s 'map(.size) | add'  \

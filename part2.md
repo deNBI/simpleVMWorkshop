@@ -95,7 +95,7 @@ We will plot a histogram on the terminal for a quick check.
 
 Since your tools work as expected, you should now create a snapshot of your
 VM for later use. Please click on `Show Actions` and `Create Snapshot`.
-Please use your initial letters (Example: Max Mustermann -> mm)
+Please use your name without whitespace (Example: Max Mustermann -> MaxMusterman).
 The upload of your snapshot might take a few minutes.
 
 ![](figures/snapshot.png)

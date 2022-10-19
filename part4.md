@@ -8,7 +8,8 @@ in order to inspect and visualize our results.
 1. Start a new VM. This time select again the de.NBI default flavor since
    we do not need that much resources anymore.
 
-2. In the image tab you can either start Rstudio (`RStudio-ubuntu1804`) or VSCode (`VSCode-ubuntu1804`).
+2. In the image tab you can either start Rstudio (`RStudio-ubuntu2004`) 
+   or VSCode (`VSCode-ubuntu2004`).
    
 3. In the volume tab please choose the volume you created
    in the previous part of the workshop.
@@ -39,15 +40,18 @@ in order to inspect and visualize our results.
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/analyse.Rmd
    ```   
    
-4. You might have to install markdown as indicated by the warning in the upper
-   part of the editor. Just click on `install`.
-
-5. Further you have to install the necessary libraries: 
+4. Further you have to install necessary R libraries. Please switch back
+   to the R console:
+   ![](figures/rconsole.png)
+   Install the following libraries: 
    ```
    install.packages(c("ggplot2"))
    install.packages(c("RColorBrewer"))
    ```
-6. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
+5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
+
+6. You might have to install markdown as indicated by the warning in the upper
+   part of the editor. Just click on `install`.
 
 ### 4.3 VSCode
 
