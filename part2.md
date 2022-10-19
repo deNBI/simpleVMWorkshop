@@ -50,11 +50,11 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    tool that you need for your research.
    Let's test this statement by installing the following commands via `sudo`.
    ```
-   sudo apt install -y fortune cowsay
+   sudo apt install -y fortune-mod cowsay
    ```
    and run both commands via
    ```
-   fortune | cowsay
+   /usr/games/fortune | /usr/games/cowsay 
    ```
 
 ### 2.2 Search for a genome 
