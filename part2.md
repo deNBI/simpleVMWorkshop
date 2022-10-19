@@ -77,7 +77,7 @@ and scale up our analysis by providing more cores to mash.
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
    ```
 
-2. You can now run the commands from the first part with found datasets as input:
+2. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
    ```
    for f in $(mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*" sra/ftp.era.ebi.ac.uk/vol1/fastq  ); do 
        sra_id=$(echo $f | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
