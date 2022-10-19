@@ -1,56 +1,121 @@
-## Part 3: Inspect your generated data via a research environment
+## Part 3: Scale up your analysis
 
-We now want to start a new VM. This time we would like to use an IDE like RStudio or VScode 
-in order to inspect and visualize our results.
+In the first part you have tested the SimpleVM environment. Now it is time
+for using a VM with more cores to scale up the analysis. For this reason you 
+saved your installed tools by creating a snapshot. You will now reuse
+this snapshot with a larger flavor.
+Further, we will search for more metagenomic datasets via object storage
+and scale up our analysis by providing more cores to mash.
 
-### 3.1 Create a VM based on a Research Environment
+### 3.1 Create a snapshot and a new VM
 
-1. Start a new VM. This time select again the de.NBI default flavor since
-   we do not need that much resources anymore.
+1. Navigate to the `New Instance` tab (and select the SimpleVMRMU project).
 
-2. In the image tab you can either start Rstudio (`RStudio-ubuntu1804`) or VSCode (`VSCode-ubuntu1804`).
-   
-3. In the volume tab please choose the volume you created
-   in the previous part of the workshop.
-   Please use again `/vol/data` as mountpath.
-   ![](figures/reuseVolume.png)
+2. Create a VM based on your snapshot with the **de.NBI small** flavor
+   which has more cores. Click on the Snapshot tab to select your snapshot.
+   ![](figures/startsnap.png)
 
-4. Confirm all checkboxes and click on start.
+3. Please create a volume for your VM and as set your 
+   initial letters (Example: Max Mustermann -> mm) as volume name. 
+   Use `/vol/data` as mountpath and provide 1 GB as the storage size.
 
-5. On the instance overview, select `How to connect` of the newly started VM 
-   and click on the URL. A tab should be opened up in your browser.
+### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 
-6. If you decided to use RStudio you can continue to chapter 3.2. If clicked
-   on VSCode, please go to chapter 3.3.
+1. Click on `Terminal` in the upper menu and select `New Terminal`.
 
-### 3.2 RStudio
-
-1. Login credentials for the RStudio user login are.
+2. Unfortunately, conda does not offer a minio cli binary,
+   which means that we would have to install it manually.
+   Download the binary:
    ```
-   Username: ubuntu  
-   Password: simplevm
+   wget https://dl.min.io/client/mc/release/linux-amd64/mc
+   ```
+   Move it to a folder where other binaries usually are stored:
+   ```
+   sudo mv mc /usr/local/bin/
+   ```
+   Change file permissions:
+   ```
+   chmod a+x /usr/local/bin/mc
    ```
 
-2. If you have chosen RStudio then please open a Terminal first by selecting
-   `Tools` -> `Terminal` -> `New Terminal`.
-
-3. Download the Script by running wget:
+3. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
    ```
-   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/analyse.Rmd
-   ```   
-   
-4. You might have to install markdown as indicated by the warning in the upper
-   part of the editor. Just click on `install`.
-
-5. Further you have to install the necessary libraries: 
+   mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
    ```
-   install.packages(c("ggplot2"))
-   install.packages(c("RColorBrewer"))
+
+4. List which files are available for SRA number `SRR3984908`:
    ```
-6. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
+   mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
+   ```
 
-### 3.3 VSCode
+5. Check the size of these files
+   ```
+   mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
+   ```
 
-1. If you have chosen VSCode
+6. You can read the first lines of these files by using `mc cat`.
+   ```
+   mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
+   ```
 
-### 3.4 Todo: Create final image and volume for the reviewer
+7. Search for SRA run accessions we want to analyse and check their size.
+   ```
+   mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
+      |  jq -s 'map(.size) | add'  \
+      | numfmt --to=iec-i --suffix=B --padding=7
+   ```
+
+### 3.3 Run commands with more cores and plot your result
+
+1. We created a mash index out of selected genomes that were classified as  
+   "greatest threat to human health" by the World Health Organisation (WHO)
+   in 2017: https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed 
+   Please download the index:
+   ```
+   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
+   ```
+
+2. You can now run the commands from the first part with found datasets as input:
+   ```
+   for f in $(mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*" sra/ftp.era.ebi.ac.uk/vol1/fastq  ); do 
+       sra_id=$(echo $f | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
+       mc cat $f | mash screen -p 8 genomes.msh -  \
+           | sed "s/^/${sra_id}\t/g"  \
+           | sed 's/\//\t/' ;
+   done | tee output.tsv
+   ```
+
+3. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+   ```
+   csvtk -t plot hist -H -f 3 output.tsv -o output.pdf
+   ```
+   You can open this file by a click on the Explorer View and selecting the pdf. 
+   ![](figures/openpdf.png)
+
+4. Get the title and the environment name about the found datasets by using Entrez tools
+   ```
+   while read sraid; do  
+     esearch -db sra -query ${sraid} \
+       | esummary \
+       | xtract -pattern DocumentSummary -element @ScientificName,Title \
+       | sort | uniq  \
+       | sed "s/^/${sraid}\t/g"; 
+   done < <(cut -f 1 output.tsv | sort | uniq) > publications.tsv
+   ```
+
+5. Set correct permissions on your volume:
+   ```
+   sudo chown ubuntu:ubuntu /vol/data/
+   ```
+
+6. Copy your results to the volume for later use:
+   ```
+   cp publications.tsv output.tsv /vol/data
+   ```
+
+7. Go to the Instance Overview page. Click on actions and detach the volume.
+   ![](figures/detachvolume.png)
+
+8. Finally, you can delete the VM.
+
+Continue with [Part 3](part3.md)

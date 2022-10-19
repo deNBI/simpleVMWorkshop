@@ -15,7 +15,7 @@ interactions of the microbial community.
 
 In order to find those microbes, you will have to interact with 
 the de.NBI Cloud via simpleVM. This Workshop is divided into three
-parts. 
+parts.
 
 ### Part 1: Big things start small  
 
@@ -24,16 +24,23 @@ and how to configure them.
 
 **[Go to the first part](part1.md)**
 
-### Part 2: Scale up your analysis 
+### Part 2: Verify your VM properties and tools
+
+In the second part you will test whether SimpleVM correctly
+provisioned your VM with all your tools installed on it.
+
+**[Go to the second part](part2.md)**
+
+### Part 3: Scale up your analysis 
 
 In the second part you will learn about object storage and the 
 Sequence Read Archive. Further, you will run your analysis pipeline.
 
-**[Go to the second part](part2.md)**
+**[Go to the third part](part3.md)**
 
-### Part 3: Inspect your generated data via a research environment
+### Part 4: Inspect your generated data via a research environment
 
 In the last part you will start a virtual machine with a research
 environment installed like RStudio or Jupyter notebook via VSCode.
 
-**[Go to the third part](part3.md)**
+**[Go to the fourth part](part4.md)**
