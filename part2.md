@@ -100,4 +100,4 @@ The upload of your snapshot might take a few minutes.
 
 ![](figures/snapshot.png)
 
-Continue with [Part 2](part2.md)
+Back to [Part 1](part1.md) | Next to [Part 3](part3.md)

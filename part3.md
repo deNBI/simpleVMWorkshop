@@ -23,7 +23,9 @@ and scale up our analysis by providing more cores to mash.
 
 1. Click on `Terminal` in the upper menu and select `New Terminal`.
 
-2. Unfortunately, conda does not offer a minio cli binary,
+2. Activate the conda environment by running `conda activate denbi`.
+
+3. Unfortunately, conda does not offer a minio cli binary,
    which means that we would have to install it manually.
    Download the binary:
    ```
@@ -38,27 +40,27 @@ and scale up our analysis by providing more cores to mash.
    chmod a+x /usr/local/bin/mc
    ```
 
-3. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
+4. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
    ```
    mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
    ```
 
-4. List which files are available for SRA number `SRR3984908`:
+5. List which files are available for SRA number `SRR3984908`:
    ```
    mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-5. Check the size of these files
+6. Check the size of these files
    ```
    mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-6. You can read the first lines of these files by using `mc cat`.
+7. You can read the first lines of these files by using `mc cat`.
    ```
    mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
    ```
 
-7. Search for SRA run accessions we want to analyse and check their size.
+8. Search for SRA run accessions we want to analyse and check their size.
    ```
    mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
       |  jq -s 'map(.size) | add'  \
@@ -75,7 +77,7 @@ and scale up our analysis by providing more cores to mash.
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
    ```
 
-2. You can now run the commands from the first part with found datasets as input:
+2. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
    ```
    for f in $(mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*" sra/ftp.era.ebi.ac.uk/vol1/fastq  ); do 
        sra_id=$(echo $f | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
@@ -118,4 +120,4 @@ and scale up our analysis by providing more cores to mash.
 
 8. Finally, you can delete the VM.
 
-Continue with [Part 3](part3.md)
+Back to [Part 2](part2.md) | Next to [Part 4](part4.md)

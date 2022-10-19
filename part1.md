@@ -29,3 +29,5 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
 4. Select a URL path for Theia. You will access Theia via this URL.
    ![](figures/researchenvironment_url.png)
 5. Confirm the checkboxes and click on Start.
+
+Next to [Part 2](part2.md)
