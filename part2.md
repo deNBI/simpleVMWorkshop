@@ -117,3 +117,5 @@ and scale up our analysis by providing more cores to mash.
    ![](figures/detachvolume.png)
 
 8. Finally, you can delete the VM.
+
+Continue with [Part 3](part3.md)
