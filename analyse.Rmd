@@ -9,7 +9,7 @@ mash = read.table("/vol/data/output.tsv")
 
 publications = read.table("/vol/data/publications.tsv")
 
-ggplot(data) + geom_histogram(aes(x=V3)) +
+ggplot(mash) + geom_histogram(aes(x=V3)) +
   xlab("Matched K-mer hashes") +
   ylab("Found datasets")
 ```
