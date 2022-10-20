@@ -33,7 +33,7 @@ in order to inspect and visualize our results.
    Password: simplevm
    ```
 
-2. If you have chosen RStudio then please open a Terminal first by selecting
+2. In RStudio please open a Terminal first by either selecting the `Terminal` tab, or by clicking on
    `Tools` -> `Terminal` -> `New Terminal`.
 
 3. Download the Script by running wget:
@@ -46,8 +46,7 @@ in order to inspect and visualize our results.
    ![](figures/rconsole.png)
    Install the following libraries: 
    ```
-   install.packages(c("ggplot2"))
-   install.packages(c("RColorBrewer"))
+   install.packages(c("ggplot2","RColorBrewer"))
    ```
 5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
 
