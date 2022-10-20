@@ -15,7 +15,7 @@ in order to inspect and visualize our results.
    Please use again `/vol/data` as mountpath. Click on `Add +` to add the volume.
    ![](figures/reuseVolume.png)
 
-4. Grant again access to all project members with a `cloud-portal-support` tag.
+4. Grant again access to all project members with a `Cloud-portal-support` tag.
    This way these members get ssh access to your VM and can help you in case
    something does not work as expected.
    ![](figures/grantAccess.png)
