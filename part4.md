@@ -58,6 +58,7 @@ in order to inspect and visualize our results.
 
 Finally, you may want to publish your results once you are done with your research project.
 You could provide your data and tools via your snapshot and volumes to a reviewer,
-who could reproduce your results.
+who could reproduce your results. Alternatively, you can also provide the Rmarkdown document 
+together with the input data to reproduce the last part of the analysis and the visualization.
 
 Back to [Part 3](part3.md)
