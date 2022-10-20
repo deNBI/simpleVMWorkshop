@@ -5,7 +5,18 @@ has a few cores and a small amount of RAM.
 
 You start this tutorial from your profile page (https://cloud.denbi.de/portal/).
 
-### 1.1 Set an SSH key in your account
+### 1.1 Create a de.NBI Cloud Account
+
+If you do not have a de.NBI Cloud account, please register for one
+via this link: https://cloud.denbi.de/register.
+You can read more about the registration process in our 
+de.NBI Cloud wiki: https://cloud.denbi.de/wiki/registration/.
+Please make sure to to click on “continue” if this button shows up.
+
+If you successfully registered for a de.NBI Cloud account,
+you should be able to log in to the de.NBI Cloud Portal: https://cloud.denbi.de/portal/.
+
+### 1.2 Set an SSH key in your account
 
 1. Click on the `New Instance` tab.
 
@@ -15,7 +26,7 @@ you will access all VMs via the browser. However, for your future work using
 SimpleVM, we highly recommend to read our de.NBI Cloud wiki regarding
 SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
 
-### 1.2 Start a VM
+### 1.3 Start a VM
 
 1. Choose a name for your VM.
 2. Select **de.NBI default** flavor and **TheiaIDE-ubuntu1804** image.
