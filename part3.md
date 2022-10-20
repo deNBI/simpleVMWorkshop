@@ -24,7 +24,7 @@ and scale up our analysis by providing more cores to mash.
    Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
    ![](figures/createVolume.png)
 
-5. Grant again access to all project members with a `cloud-portal-support` tag.
+5. Grant again access to all project members with a `Cloud-portal-support` tag.
    This way these members get ssh access to your VM and can help you in case
    something does not work as expected.
    ![](figures/grantAccess.png)
@@ -34,17 +34,19 @@ and scale up our analysis by providing more cores to mash.
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 
 1. You are now on the `Instance Overview` page. You can delete your old VM which
-   we used to create your snapshot. On your new VM, please click on `how to connect`.
+   we used to create your snapshot. To do this, open the action selection of the old machine again by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
+   
+2. On your new VM, please click on `how to connect`.
    You should see again a link. Please click on the link to open Theia-IDE on a new
    browser tab.
    ![](figures/howtoconnect.png)
 
-2. Click on `Terminal` in the upper menu and select `New Terminal`.
+3. Click on `Terminal` in the upper menu and select `New Terminal`.
    ![](figures/terminal.png)
 
-3. Activate the conda environment by running `conda activate denbi`.
+4. Activate the conda environment by running `conda activate denbi`.
 
-4. Unfortunately, conda does not offer a minio cli binary,
+5. Unfortunately, conda does not offer a minio cli binary,
    which means that we would have to install it manually.
    Download the binary:
    ```
@@ -59,27 +61,27 @@ and scale up our analysis by providing more cores to mash.
    chmod a+x /usr/local/bin/mc
    ```
 
-5. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
+6. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
    ```
    mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
    ```
 
-6. List which files are available for SRA number `SRR3984908`:
+7. List which files are available for SRA number `SRR3984908`:
    ```
    mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-7. Check the size of these files
+8. Check the size of these files
    ```
    mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
    ```
 
-8. You can read the first lines of these files by using `mc cat`.
+9. You can read the first lines of these files by using `mc cat`.
    ```
    mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
    ```
 
-9. Search for SRA run accessions we want to analyse and check the sum of their size
+10. Search for SRA run accessions we want to analyse and check the sum of their size
    (this may take a while to complete):
    ```
    mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
