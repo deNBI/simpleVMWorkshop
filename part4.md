@@ -1,6 +1,6 @@
 ## Part 4: Inspect your generated data via a research environment
 
-We now want to start a new VM. This time we would like to use an IDE like RStudio or VScode 
+We now want to start a new VM. This time we would like to use RStudio 
 in order to inspect and visualize our results.
 
 ### 4.1 Create a VM based on a Research Environment
@@ -8,8 +8,7 @@ in order to inspect and visualize our results.
 1. Start a new VM. This time select again the de.NBI default flavor since
    we do not need that much resources anymore.
 
-2. In the image tab you can either start Rstudio (`RStudio-ubuntu2004`) 
-   or VSCode (`VSCode-ubuntu2004`).
+2. In the image tab you can either start Rstudio (`RStudio-ubuntu2004`).
    
 3. In the volume tab please choose the volume you created
    in the previous part of the workshop.
@@ -20,9 +19,6 @@ in order to inspect and visualize our results.
 
 5. On the instance overview, select `How to connect` of the newly started VM 
    and click on the URL. A tab should be opened up in your browser.
-
-6. If you decided to use RStudio you can continue to chapter 4.2. If you have clicked
-   on VSCode, please go to chapter 4.3.
 
 ### 4.2 RStudio
 
@@ -53,10 +49,13 @@ in order to inspect and visualize our results.
 6. You might have to install markdown as indicated by the warning in the upper
    part of the editor. Just click on `install`.
 
-### 4.3 VSCode
+7. You can now start the script by clicking on `Run` -> `Restart R and run all chunks`.
+  ![](figures/runRScript.png)
 
-1. If you have chosen VSCode
+### 4.3 Provide your research data to a reviewer
 
-### 4.4 Todo: Create final image and volume for the reviewer
+Finally, you may want to publish your results once you are done with your research project.
+You could provide your data and tools via your snapshot and volumes to a reviewer,
+who could reproduce your results.
 
 Back to [Part 3](part3.md)
