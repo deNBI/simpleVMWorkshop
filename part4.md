@@ -33,7 +33,7 @@ in order to inspect and visualize our results.
    Password: simplevm
    ```
 
-2. If you have chosen RStudio then please open a Terminal first by selecting
+2. In RStudio please open a Terminal first by either selecting the `Terminal` tab, or by clicking on
    `Tools` -> `Terminal` -> `New Terminal`.
 
 3. Download the Script by running wget:
@@ -44,17 +44,14 @@ in order to inspect and visualize our results.
 4. Further you have to install necessary R libraries. Please switch back
    to the R console:
    ![](figures/rconsole.png)
+   
    Install the following libraries: 
    ```
-   install.packages(c("ggplot2"))
-   install.packages(c("RColorBrewer"))
+   install.packages(c("ggplot2","RColorBrewer","rmarkdown"))
    ```
 5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
 
-6. You might have to install markdown as indicated by the warning in the upper
-   part of the editor. Just click on `install`.
-
-7. You can now start the script by clicking on `Run` -> `Restart R and run all chunks`.
+6. You can now start the script by clicking on `Run` -> `Restart R and run all chunks`.
   ![](figures/runRScript.png)
 
 ### 4.3 Provide your research data to a reviewer
