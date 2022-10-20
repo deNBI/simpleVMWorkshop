@@ -51,10 +51,7 @@ in order to inspect and visualize our results.
    ```
 5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
 
-6. You might have to install markdown as indicated by the warning in the upper
-   part of the editor. Just click on `install`.
-
-7. You can now start the script by clicking on `Run` -> `Restart R and run all chunks`.
+6. You can now start the script by clicking on `Run` -> `Restart R and run all chunks`.
   ![](figures/runRScript.png)
 
 ### 4.3 Provide your research data to a reviewer
