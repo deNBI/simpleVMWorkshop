@@ -29,7 +29,7 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
    ![](figures/bioconda.png)
 4. Select a URL path for Theia. You will access Theia via this URL.
    ![](figures/researchenvironment_url.png)
-5. Grant access to all project members with a `cloud-portal-support` tag.
+5. Grant access to all project members with a `Cloud-portal-support` tag.
    This way these members get ssh access to your VM and can help you in case
    something does not work as expected.
    ![](figures/grantAccess.png)
