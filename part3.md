@@ -116,7 +116,7 @@ and scale up our analysis by providing more cores to mash.
       left_read=$(echo $1 | cut -d ' '  -f 1);  
       right_read=$(echo $1 | cut -d ' ' -f 2); 
       sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
-      mc cat $l $r | mash screen -p 3 genomes.msh - \
+      mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
           | sed "s/^/${sra_id}\t/g"  \
           | sed 's/\//\t/' > output/${sra_id}.txt ;
    }
