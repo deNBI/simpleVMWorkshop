@@ -22,7 +22,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    nproc
    ```
    Does that correspond to the actual number of cores of the flavor you selected?
-   free -h tells you the amount of RAM that is available to your VM. You will see
+   `free -h` tells you the amount of RAM that is available to your VM. You will see
    that the sum of the total amount of SWAP and Mem (first column) corresponds 
    roughly to the RAM size of your selected flavor.
    ```
