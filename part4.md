@@ -61,4 +61,9 @@ You could provide your data and tools via your snapshot and volumes to a reviewe
 who could reproduce your results. Alternatively, you can also provide the Rmarkdown document 
 together with the input data to reproduce the last part of the analysis and the visualization.
 
+You can share your research results via Zenodo, Figshare and other providers who will generate 
+a citable, stable Digital Object Identifier (DOI) for your results. [re3data](https://www.re3data.org/)
+provides an overview of research data repositories that are suitable for your domain-specific research
+results.
+
 Back to [Part 3](part3.md)
