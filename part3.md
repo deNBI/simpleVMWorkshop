@@ -130,7 +130,7 @@ and scale up our analysis by providing more cores to mash.
    parallel -a reads.tsv search
    ```
 5. Optional: This command will run a few minutes. You could open a second terminal
-   and inspect with htop the cpu utilization.
+   and inspect the cpu utilization with `htop`.
    ![](figures/htop.png)
 
 6. Concatenate all results into one file via `cat output/*.txt > output.tsv`
