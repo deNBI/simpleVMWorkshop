@@ -15,7 +15,7 @@ and scale up our analysis by providing more cores to mash.
    navigate to the `New Instance` tab (and select the SimpleVMRMU project).
 
 2. Provide again a name for your instance.
-3. In the flavors sections please choose the **de.NBI small** flavor which has more cores than **de.NBI default**. 
+3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available. 
    Click on the Snapshot tab to select your snapshot.
    ![](figures/startsnap.png)
 
@@ -24,7 +24,12 @@ and scale up our analysis by providing more cores to mash.
    Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
    ![](figures/createVolume.png)
 
-5. Click on Start!
+5. Grant again access to all project members with a `cloud-portal-support` tag.
+   This way these members get ssh access to your VM and can help you in case
+   something does not work as expected.
+   ![](figures/grantAccess.png)
+
+6. Confirm the checkboxes and click on Start.
 
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 
@@ -74,7 +79,7 @@ and scale up our analysis by providing more cores to mash.
    mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
    ```
 
-9. Search for SRA run accessions we want to analyse and check their size
+9. Search for SRA run accessions we want to analyse and check the sum of their size
    (this may take a while to complete):
    ```
    mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
@@ -92,24 +97,46 @@ and scale up our analysis by providing more cores to mash.
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
    ```
 
-2. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
+2. We created a file that points to the datasets that you have found in the previous chapter.
+   Download the input file via:
    ```
-   for f in $(mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*" sra/ftp.era.ebi.ac.uk/vol1/fastq  ); do 
-       sra_id=$(echo $f | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
-       mc cat $f | mash screen -p 8 genomes.msh -  \
-           | sed "s/^/${sra_id}\t/g"  \
-           | sed 's/\//\t/' ;
-   done | tee output.tsv
+   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
    ```
 
-3. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+3. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
+   Create a function that we will run in prallel:
+   ```
+   search(){ 
+      left_read=$(echo $1 | cut -d ' '  -f 1);  
+      right_read=$(echo $1 | cut -d ' ' -f 2); 
+      sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
+      mc cat $l $r | mash screen -p 3 genomes.msh - \
+          | sed "s/^/${sra_id}\t/g"  \
+          | sed 's/\//\t/' > ${sra_id}.txt ;
+   }
+   ```
+   Export this function, so that we can use it in the next command.
+   ```
+   export -f search
+   ```
+   Run your analysis in parallel.
+   ```
+   parallel -a reads.tsv search
+   ```
+4. Optional: This command will run a few minutes. You could open a second terminal
+   and inspect with htop the cpu utilization.
+   ![](figures/htop.png)
+
+5. Concatenate all results into one file via `cat *.txt > output.tsv`
+
+6. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    ```
    csvtk -t plot hist -H -f 3 output.tsv -o output.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf. 
    ![](figures/openpdf.png)
 
-4. Get the title and the environment name about the found datasets by using Entrez tools
+7. Get the title and the environment name about the found datasets by using Entrez tools
    ```
    while read sraid; do  
      esearch -db sra -query ${sraid} \
@@ -120,19 +147,19 @@ and scale up our analysis by providing more cores to mash.
    done < <(cut -f 1 output.tsv | sort | uniq) > publications.tsv
    ```
 
-5. Set correct permissions on your volume:
+8. Set correct permissions on your volume:
    ```
    sudo chown ubuntu:ubuntu /vol/data/
    ```
 
-6. Copy your results to the volume for later use:
+9. Copy your results to the volume for later use:
    ```
    cp publications.tsv output.tsv /vol/data
    ```
 
-7. Go to the Instance Overview page. Click on actions and detach the volume.
-   ![](figures/detachvolume.png)
+10. Go to the Instance Overview page. Click on actions and detach the volume.
+    ![](figures/detachvolume.png)
 
-8. Finally, you can delete the VM.
+11. Finally, you can delete the VM.
 
 Back to [Part 2](part2.md) | Next to [Part 4](part4.md)

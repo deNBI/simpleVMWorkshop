@@ -15,9 +15,14 @@ in order to inspect and visualize our results.
    Please use again `/vol/data` as mountpath.
    ![](figures/reuseVolume.png)
 
-4. Confirm all checkboxes and click on start.
+4. Grant again access to all project members with a `cloud-portal-support` tag.
+   This way these members get ssh access to your VM and can help you in case
+   something does not work as expected.
+   ![](figures/grantAccess.png)
 
-5. On the instance overview, select `How to connect` of the newly started VM 
+5. Confirm all checkboxes and click on start.
+
+6. On the instance overview, select `How to connect` of the newly started VM 
    and click on the URL. A tab should be opened up in your browser.
 
 ### 4.2 RStudio
