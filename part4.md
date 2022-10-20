@@ -44,6 +44,7 @@ in order to inspect and visualize our results.
 4. Further you have to install necessary R libraries. Please switch back
    to the R console:
    ![](figures/rconsole.png)
+   
    Install the following libraries: 
    ```
    install.packages(c("ggplot2","RColorBrewer","Rmarkdown"))
