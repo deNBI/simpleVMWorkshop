@@ -5,7 +5,7 @@ In this workshop your goal will be to identify pathogenic bacteria
 that were classified as "greatest threat to human health" by the 
 World Health Organisation (WHO) in 2017: https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed
 
-which can cause a disease. You will search for those microbes
+You will search for those microbes
 in publicly available metagenomic datasets that are stored in the 
 Sequence Read Archive ([SRA](https://www.ncbi.nlm.nih.gov/sra)). 
 In metagenomics, microbial genetic material 
@@ -14,7 +14,7 @@ freshwater or biogas plants in order to investigate the functions and
 interactions of the microbial community.
 
 In order to find those microbes, you will have to interact with 
-the de.NBI Cloud via simpleVM. This Workshop is divided into three
+the de.NBI Cloud via SimpleVM. This workshop is divided into three
 parts.
 
 ### Part 1: Big things start small  
