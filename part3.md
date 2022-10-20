@@ -103,7 +103,13 @@ and scale up our analysis by providing more cores to mash.
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
    ```
 
-3. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
+3. We will create a directory for the output for the following command. We will place an output
+   file for every SRA ID.
+   ```
+   mkdir output
+   ```
+
+4. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
    Create a function that we will run in prallel:
    ```
    search(){ 
@@ -112,7 +118,7 @@ and scale up our analysis by providing more cores to mash.
       sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
       mc cat $l $r | mash screen -p 3 genomes.msh - \
           | sed "s/^/${sra_id}\t/g"  \
-          | sed 's/\//\t/' > ${sra_id}.txt ;
+          | sed 's/\//\t/' > output/${sra_id}.txt ;
    }
    ```
    Export this function, so that we can use it in the next command.
@@ -123,43 +129,43 @@ and scale up our analysis by providing more cores to mash.
    ```
    parallel -a reads.tsv search
    ```
-4. Optional: This command will run a few minutes. You could open a second terminal
+5. Optional: This command will run a few minutes. You could open a second terminal
    and inspect with htop the cpu utilization.
    ![](figures/htop.png)
 
-5. Concatenate all results into one file via `cat *.txt > output.tsv`
+6. Concatenate all results into one file via `cat output/*.txt > output.tsv`
 
-6. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    ```
    csvtk -t plot hist -H -f 3 output.tsv -o output.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf. 
    ![](figures/openpdf.png)
 
-7. Get the title and the environment name about the found datasets by using Entrez tools
+8. Get the title and the environment name about the found datasets by using Entrez tools
    ```
-   while read sraid; do  
+   for sraid in $(ls -1 output/ | cut -f 1 -d '.'); do  
      esearch -db sra -query ${sraid} \
        | esummary \
        | xtract -pattern DocumentSummary -element @ScientificName,Title \
        | sort | uniq  \
        | sed "s/^/${sraid}\t/g"; 
-   done < <(cut -f 1 output.tsv | sort | uniq) > publications.tsv
+   done > publications.tsv
    ```
 
-8. Set correct permissions on your volume:
+9. Set correct permissions on your volume:
    ```
    sudo chown ubuntu:ubuntu /vol/data/
    ```
 
-9. Copy your results to the volume for later use:
-   ```
-   cp publications.tsv output.tsv /vol/data
-   ```
+10. Copy your results to the volume for later use:
+    ```
+    cp publications.tsv output.tsv /vol/data
+    ```
 
-10. Go to the Instance Overview page. Click on actions and detach the volume.
+11. Go to the Instance Overview page. Click on actions and detach the volume.
     ![](figures/detachvolume.png)
 
-11. Finally, you can delete the VM.
+12. Finally, you can delete the VM.
 
 Back to [Part 2](part2.md) | Next to [Part 4](part4.md)
