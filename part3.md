@@ -108,7 +108,7 @@ and scale up our analysis by providing more cores to mash.
 3. We will create a directory for the output for the following command. We will place an output
    file for every SRA ID.
    ```
-   mkdir output
+   mkdir -p output
    ```
 
 4. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
