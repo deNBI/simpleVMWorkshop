@@ -21,8 +21,8 @@ in order to inspect and visualize our results.
 5. On the instance overview, select `How to connect` of the newly started VM 
    and click on the URL. A tab should be opened up in your browser.
 
-6. If you decided to use RStudio you can continue to chapter 3.2. If clicked
-   on VSCode, please go to chapter 3.3.
+6. If you decided to use RStudio you can continue to chapter 4.2. If you have clicked
+   on VSCode, please go to chapter 4.3.
 
 ### 4.2 RStudio
 
