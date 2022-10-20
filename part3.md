@@ -125,6 +125,10 @@ and scale up our analysis by providing more cores to mash.
    ```
    export -f search
    ```
+   Install `parallel` to run the function in parallel on as many CPUs as the VM currently has available (type `Y` at the prompt).
+   ```
+   sudo apt install parallel
+   ```
    Run your analysis in parallel.
    ```
    parallel -a reads.tsv search
