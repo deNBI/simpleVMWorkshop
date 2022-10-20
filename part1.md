@@ -27,6 +27,9 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
    * jq
    * parallel
    ![](figures/bioconda.png)
+   
+   The filter in the name column can be used to search for the packages.
+
 4. Select a URL path for Theia. You will access Theia via this URL.
    ![](figures/researchenvironment_url.png)
 5. Grant access to all project members with a `Cloud-portal-support` tag.
