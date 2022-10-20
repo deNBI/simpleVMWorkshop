@@ -46,7 +46,7 @@ in order to inspect and visualize our results.
    ![](figures/rconsole.png)
    Install the following libraries: 
    ```
-   install.packages(c("ggplot2","RColorBrewer"))
+   install.packages(c("ggplot2","RColorBrewer","Rmarkdown"))
    ```
 5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
 
