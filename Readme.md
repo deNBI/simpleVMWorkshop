@@ -44,3 +44,10 @@ In the last part you will start a virtual machine with a research
 environment installed like RStudio or Jupyter notebook via VSCode.
 
 **[Go to the fourth part](part4.md)**
+
+### Part 5: Use a cluster setup to further scale up your analysis
+
+In this part you will use a SimpleVM Cluster to distribute your analysis 
+on multiple machines instead of just one.
+
+**[Go to the fourth part](part5.md)**

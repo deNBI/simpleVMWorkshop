@@ -12,7 +12,7 @@ and scale up our analysis by providing more cores to mash.
 1. Click on `Overviews` -> `Snapshots` in left menu and check which status
    your snapshot has. You can also filter of the name in the top menu. 
    If it has the status `active`, you can 
-   navigate to the `New Instance` tab (and select the SimpleVMRMU project).
+   navigate to the `New Instance` tab (and select the SimpleVMIntro2022 project).
 
 2. Provide again a name for your instance.
 3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available. 
@@ -88,6 +88,11 @@ and scale up our analysis by providing more cores to mash.
       |  jq -s 'map(.size) | add'  \
       | numfmt --to=iec-i --suffix=B --padding=7
    ```
+   where
+      * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
+      *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
+      * `numfmt` transforms the sum to a human-readable string.
+
 
 ### 3.3 Run commands with more cores and plot your result
 
@@ -104,7 +109,10 @@ and scale up our analysis by providing more cores to mash.
    ```
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
    ```
-
+   You can inspect the file by using `cat`:
+   ```
+   cat reads.tsv
+   ```
 3. We will create a directory for the output for the following command. We will place an output
    file for every SRA ID.
    ```
@@ -123,6 +131,18 @@ and scale up our analysis by providing more cores to mash.
           | sed 's/\//\t/' > output/${sra_id}.txt ;
    }
    ```
+   In order to understand what this funtion does let's take the following datasets as an example:
+   ```
+   sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz    sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz
+   ```
+   where
+    * `left_read` is left file (`sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz`)
+    * `right_read` is the right file (`sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz`)
+    * `sra_id` is the prefix of the file name (`SRR6439511`)
+    * `mc cat` streams the files into `mash screen` which is using the sketched genomes `genomes.msh`
+       to filter the datasets.
+    * Both `sed`s are just post-processing the output and place every match in the `output` folder.
+
    Export this function, so that we can use it in the next command.
    ```
    export -f search
@@ -131,6 +151,10 @@ and scale up our analysis by providing more cores to mash.
    ```
    parallel -a reads.tsv search
    ```
+   where
+     * `reads.tsv` is a list of datasets that we want to scan.
+     * `search` is the function that we want to call.
+
 5. Optional: This command will run a few minutes. You could open a second terminal
    and inspect the cpu utilization with `htop`.
    ![](figures/htop.png)
@@ -154,6 +178,13 @@ and scale up our analysis by providing more cores to mash.
        | sed "s/^/${sraid}\t/g"; 
    done > publications.tsv
    ```
+   where
+    * `for sraid in $(ls -1 output/ | cut -f 1 -d '.');` iterates over all datasets found in the output
+      directory.
+    * `esearch` just looks up the scientific name and title of the SRA study.
+    * 'sed' adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
+       the scientific name and the third column is the study title.
+    * All results are stored the `publications.tsv` file.
 
 9. Set correct permissions on your volume:
    ```
@@ -168,6 +199,6 @@ and scale up our analysis by providing more cores to mash.
 11. Go to the Instance Overview page. Click on actions and detach the volume.
     ![](figures/detachvolume.png)
 
-12. Finally, you can delete the VM.
+12. Finally, since you saved your output data you can safely delete the VM.
 
 Back to [Part 2](part2.md) | Next to [Part 4](part4.md)

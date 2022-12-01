@@ -10,7 +10,7 @@ before you scale up your research workflow in the next part.
 Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
 1. Click on the Instances tab (Overview -> Instances). After you have initiated the start-up of the machine, you should have been automatically redirected there. Now open the "How to connect"
-   dropdown of your machine. Click on the theiaide URL which opens a new browser tab.
+   dropdown of your machine. Click on the Theia ide URL which opens a new browser tab.
    ![](figures/howtoconnect.png)
 2. Click on `Terminal` in the upper menu and select `New Terminal`.
    ![](figures/terminal.png)
