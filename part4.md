@@ -66,4 +66,5 @@ and other providers who will generate a citable, stable Digital Object Identifie
 [re3data](https://www.re3data.org/) provides an overview of research data repositories that are suitable 
 for your domain-specific research results.
 
-Back to [Part 3](part3.md)
+
+Back to [Part 3](part3.md) | Next to [Part 5](part5.md)

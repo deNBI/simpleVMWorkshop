@@ -1,11 +1,11 @@
-## Part 5: Scale further up your analysis 
+## Part 5: Scale up your analysis horizontally 
 
 In this part of the tutorial you will scale your cluster horizontally by using a SimpleVM Cluster.
-A SimpleVM Cluster consists of a master and multiple worker nodes.
-In the following you will configure a cluster and submit your tools
-to a SLURM job scheduler.
-
-TODO: Write about SLURM workload manager
+A SimpleVM Cluster consists of a master and multiple worker nodes. On all nodes a SLURM workload manager
+will be installed. SLURM allows you to submit scripts, so-called jobs, that are queued up and once there
+are free resources (CPUs, RAM) available on one of the worker nodes the script will be executed on that node.
+This way you don't have to look up which nodes are free in order to run your jobs.
+In the following you will configure a cluster and submit your tools to a SLURM job scheduler. 
 
 ### 5.1 Create a Cluster
 
@@ -70,7 +70,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
     * `hostname` reports the name of the worker node.
 
 6. You could now submit the job to the SLURM scheduler by using `sbatch` and directly after that
-   check if your SLURM is executing your script with `squeue`.
+   check if SLURM is executing your script with `squeue`.
 
    sbatch:
    ```
@@ -102,14 +102,16 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    ```
 
 8. One way to distribute jobs is to use so-called array jobs. With array jobs you specify how many times
-   your script should be executed. Every time the script is executed, a number between 0 and the number of times
+   your script should be executed. Every time the script is executed, a number between 1 and the number of times
    you want the script to be executed is assigned to the script execution. The specific number is saved in a
-   variable (`SLURM_ARRAY_TASK_ID`). If you specify `--array=0-100` then your script is 100 times executed and
-   the `SLURM_ARRAY_TASK_ID` variable will get a value between 0 and 100. SLURM will distribute the
+   variable (`SLURM_ARRAY_TASK_ID`). If you specify `--array=1-100` then your script is 100 times executed and
+   the `SLURM_ARRAY_TASK_ID` variable will get a value between 1 and 100. SLURM will distribute the
    jobs on your cluster.
 
    Please fetch the modified script
-   Todo: Add link
+   ```
+   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/basic_array.sh
+   ```
 
    Which is simply reading out the `SLURM_ARRAY_TASK_ID` variable and placing them in a file in an
    output directory:
@@ -129,7 +131,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
  
    You can execute this script a 100 times with the following command 
    ```
-   sbatch --array=0-100 basic_array.sh
+   sbatch --array=1-100 basic_array.sh
    ```
    
    If you now check the `output_array` folder, you should see numbers from 0 to 100.
@@ -139,43 +141,70 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
 
 ### 5.3 Scan the SRA for genomes
 
-1. We can now reuse the `search` function of the third part and submit an array job with the number of 
-datasets we want to scan.
+1. We can now reuse the `search` function of the third part of this tutorial and
+submit an array job with the number of datasets we want to scan.
 
-Please download the updated script which looks like this:
+Please download the updated script by using wget:
+```
+wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
+```
 
+This is the content of the script
 ```
 #!/bin/bash
 
+# Create an output directory
+mkdir output_final
+
+# Use the conda environment you installed in your snapshot and activate it
 eval "$(conda shell.bash hook)"
 conda activate denbi
+
 # Add S3 SRA OpenStack Config
 mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
 
-# Search function
+# Define search function you have already used in part 3
 search(){
    left_read=$(echo $1 | cut -d ' '  -f 1);  
    right_read=$(echo $1 | cut -d ' ' -f 2);
    sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
    mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
         | sed "s/^/${sra_id}\t/g"  \
-        | sed 's/\//\t/' > output/${sra_id}.txt ;
+        | sed 's/\//\t/' > output_final/${sra_id}.txt ;
 }
 
+# Create a variable for the array task id
 LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
 LINE=$(sed "${LINE_NUMBER}q;d" reads.tsv)
 
+# Search for the datasets
 search ${LINE} 
 ```
-TODO where
-  * `eval "$(conda shell.bash hook)"` reuses 
 
-TODO Download the input file.
+2. The input for the script is the following file
+Todo: Search for more datasets
 
-2. Run the actual analysis with
-
-TODO:
 ```
-sbatch...
+wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
 ```
 
+You can execute the array job by using the following command:
+
+```
+sbatch --array=1-7 search.sh
+```
+
+3. You could now check the state of your jobs by using `squeue`.
+
+4. Concatenate all results into one file via `cat output_final/*.txt > output_final.tsv`
+
+5. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+   ```
+   csvtk -t plot hist -H -f 3 output_final.tsv -o output_final.pdf
+   ```
+   You can open this file by a click on the Explorer View and selecting the pdf.
+   ![](figures/openpdf.png)
+
+TODO: update png
+
+Back to [Part 4](part4.md)
