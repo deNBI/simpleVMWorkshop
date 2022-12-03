@@ -15,9 +15,10 @@ In the following you will configure a cluster and submit your tools to a SLURM j
 2. Since your master node is just used for submitting jobs, please select *de.NBI mini* as flavor and
    the snapshot you created in the previous parts as image.
    ![](./figures/clusterMasterImage.png)
-
-3. The worker nodes will run the actual tools, so we need a flavor wir more cores then the one that the master node is
-   using. Therefore, please select *de.NBI large* as flavor and the same snapshot as in the previous part.
+   The same snapshot will also be used for all worker nodes.
+3. The worker nodes will run the actual tools, so we need a flavor wir more cores then the one
+   that the master node is using. Therefore, please select *de.NBI large* as flavor and start
+   two worker nodes by providing `2` as the worker count.
 
 4. Now click on Start! Thats it! Just with a few clicks you started your own cluster.
 
@@ -161,14 +162,14 @@ eval "$(conda shell.bash hook)"
 conda activate denbi
 
 # Add S3 SRA OpenStack Config
-mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
+/vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
 
 # Define search function you have already used in part 3
 search(){
    left_read=$(echo $1 | cut -d ' '  -f 1);  
    right_read=$(echo $1 | cut -d ' ' -f 2);
    sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
-   mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
+   /vol/spool/mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
         | sed "s/^/${sra_id}\t/g"  \
         | sed 's/\//\t/' > output_final/${sra_id}.txt ;
 }
@@ -185,26 +186,37 @@ search ${LINE}
 Todo: Search for more datasets
 
 ```
-wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
+wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads2.tsv
 ```
 
-You can execute the array job by using the following command:
+3. We also need to download `mc` again since it was not saved as part of the snapshot.
 
 ```
-sbatch --array=1-7 search.sh
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
 ```
 
-3. You could now check the state of your jobs by using `squeue`.
+Please set executable rights:
 
-4. Concatenate all results into one file via `cat output_final/*.txt > output_final.tsv`
+```
+chmod a+x mc
+```
 
-5. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+4. You can execute the array job by using the following command:
+
+```
+sbatch --array=1-386 search.sh
+```
+
+5. You could now check the state of your jobs by using `squeue`.
+
+6. Concatenate all results into one file via `cat output_final/*.txt > output_final.tsv`
+
+7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    ```
    csvtk -t plot hist -H -f 3 output_final.tsv -o output_final.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf.
-   ![](figures/openpdf.png)
+   ![](figures/spoolPDF.png)
 
-TODO: update png
 
 Back to [Part 4](part4.md)

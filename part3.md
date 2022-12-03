@@ -34,7 +34,8 @@ and scale up our analysis by providing more cores to mash.
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 
 1. You are now on the `Instance Overview` page. You can delete your old VM which
-   we used to create your snapshot. To do this, open the action selection of the old machine again by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
+   we used to create your snapshot. To do this, open the action selection of the old machine again
+   by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
    
 2. On your new VM, please click on `how to connect`.
    You should see again a link. Please click on the link to open Theia-IDE on a new
@@ -131,7 +132,7 @@ and scale up our analysis by providing more cores to mash.
           | sed 's/\//\t/' > output/${sra_id}.txt ;
    }
    ```
-   In order to understand what this funtion does let's take the following datasets as an example:
+   In order to understand what this function does let's take the following datasets as an example:
    ```
    sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz    sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz
    ```
