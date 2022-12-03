@@ -52,12 +52,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    cd /vol/spool
    ```
    
-5. Download the following script via `wget`.
-   ```
-   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
-   ```
-   
-   The script contains the following content:
+5. The script contains the following content:
    ```
    #!/bin/bash
    
@@ -121,7 +116,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    #!/bin/bash
    
    # Create output directory in case it was not created so far
-   mkdir -p ouptput_array
+   mkdir -p output_array
    
    #Do not do anything for 10 seconds 
    sleep 10
@@ -176,17 +171,24 @@ search(){
 
 # Create a variable for the array task id
 LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
-LINE=$(sed "${LINE_NUMBER}q;d" reads.tsv)
+LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
 
 # Search for the datasets
 search ${LINE} 
 ```
 
-2. The input for the script is the following file
+2. The input for the script is a file containing fastq datasets (`reads.tsv`) and
+a file containing a sketch of the genomes.
 Todo: Search for more datasets
 
+Fastq datasets:
 ```
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads2.tsv
+```
+
+Sketch:
+```
+wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
 ```
 
 3. We also need to download `mc` again since it was not saved as part of the snapshot.
@@ -208,15 +210,38 @@ sbatch --array=1-386 search.sh
 ```
 
 5. You could now check the state of your jobs by using `squeue`.
+   Please note that the job execution might take a few hours. The VM will be available even after the workshop.
+   If you are interested in the results, you could plot them later.
 
 6. Concatenate all results into one file via `cat output_final/*.txt > output_final.tsv`
 
 7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+   Activate the denbi conda environment:
+   ```
+   conda activate denbi
+   ```
+   Run `csvtk` on the output
    ```
    csvtk -t plot hist -H -f 3 output_final.tsv -o output_final.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf.
    ![](figures/spoolPDF.png)
+    
+   Since there are many matches with a low number of k-mer hashes, you could filter the table first and plot
+   the filtered results.
+   ```
+   sort -rnk 3,3 output_final.tsv | head -n 50 > output_final_top50.tsv
+   ```   
 
+   ```
+   csvtk -t plot hist -H -f 3 output_final_top50.tsv -o output_final_top50.pdf
+   ```
+
+8. Finally, you could view the top matches via `less` and check their description on the 
+   [SRA website](https://www.ncbi.nlm.nih.gov/sra) by providing the SRA run accession
+   (Example `ERR4181696`) for further investigation.
+   ```
+   less output_final_top50.tsv
+   ```
 
 Back to [Part 4](part4.md)
