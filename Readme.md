@@ -40,8 +40,8 @@ Sequence Read Archive. Further, you will run your analysis pipeline.
 
 ### Part 4: Inspect your generated data via a research environment
 
-In the last part you will start a virtual machine with a research
-environment installed like RStudio or Jupyter notebook via VSCode.
+In the last part you will start a virtual machine with a RStudio research
+environment installed.
 
 **[Go to the fourth part](part4.md)**
 

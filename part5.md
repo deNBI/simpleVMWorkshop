@@ -20,7 +20,7 @@ In the following you will configure a cluster and submit your tools to a SLURM j
    that the master node is using. Therefore, please select *de.NBI large* as flavor and start
    two worker nodes by providing `2` as the worker count.
 
-4. Now click on Start! Thats it! Just with a few clicks you started your own cluster.
+4. Now click on Start! That's it! Just with a few clicks you started your own cluster.
 
 ### 5.2 Investigate your cluster setup
 
@@ -51,8 +51,12 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    ```
    cd /vol/spool
    ```
-   
-5. The script contains the following content:
+
+5. Please fetch the script that we want to execute
+   ```
+   wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/basic.sh
+   ```
+   The script contains the following content:
    ```
    #!/bin/bash
    
@@ -179,7 +183,6 @@ search ${LINE}
 
 2. The input for the script is a file containing fastq datasets (`reads.tsv`) and
 a file containing a sketch of the genomes.
-Todo: Search for more datasets
 
 Fastq datasets:
 ```
