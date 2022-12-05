@@ -26,21 +26,21 @@ and how to configure them.
 
 ### Section 2: Verify your VM properties and tools
 
-In the second part you will test whether SimpleVM correctly
+In the second section you will test whether SimpleVM correctly
 provisioned your VM with all your tools installed on it.
 
 **[Go to the second section](part2.md)**
 
 ### Section 3: Scale up your analysis 
 
-In the second part you will learn about object storage and the 
+In the third section you will learn about object storage and the 
 Sequence Read Archive. Further, you will run your analysis pipeline.
 
 **[Go to the third section](part3.md)**
 
 ### Section 4: Inspect your generated data via a research environment
 
-In the last part you will start a virtual machine with a RStudio research
+In the fourth section you will start a virtual machine with a RStudio research
 environment installed.
 
 **[Go to the fourth section](part4.md)**

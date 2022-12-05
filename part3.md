@@ -30,6 +30,7 @@ and scale up our analysis by providing more cores to mash.
    ![](figures/grantAccess.png)
 
 6. Confirm the checkboxes and click on Start.
+   While the VM is starting please fill out our [user survey](https://cloud.denbi.de/survey/index.php/232181).
 
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
 

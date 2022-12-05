@@ -21,6 +21,8 @@ in order to inspect and visualize our results.
    ![](figures/grantAccess.png)
 
 5. Confirm all checkboxes and click on start.
+   Since it takes some time until the VM is started, please complete the last part of the
+   [unix tutorial](https://github.com/deNBI/unix-course#part-3-advanced-concepts) in the meantime.
 
 6. Again it will take some while to start the machine. On the instance overview, select `How to connect` of the newly started VM 
    and click on the URL. A tab should be opened up in your browser.

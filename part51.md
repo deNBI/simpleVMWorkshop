@@ -1,6 +1,6 @@
 ## Section 5 (Part 1): Scale up your analysis horizontally 
 
-In this part of the tutorial you will scale your cluster horizontally by using a SimpleVM Cluster.
+In this part of the tutorial you will scale up your cluster horizontally by using a SimpleVM Cluster.
 A SimpleVM Cluster consists of a master and multiple worker nodes. On all nodes a SLURM workload manager
 will be installed. SLURM allows you to submit scripts, so-called jobs, that are queued up and once there
 are free resources (CPUs, RAM) available on one of the worker nodes the script will be executed on that node.
