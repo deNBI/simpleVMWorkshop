@@ -24,7 +24,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    ```
    Does that correspond to the actual number of cores of the flavor you selected?
    `free -h` tells you the amount of RAM that is available to your VM. You will see
-   that the sum of the total amount of SWAP and Mem (first column) corresponds 
+   that the sum of the total amount of Mem (first column, second row) corresponds 
    roughly to the RAM size of your selected flavor.
    ```
    free -h
@@ -97,7 +97,9 @@ We will plot a histogram on the terminal for a quick check.
 ### 2.3 Create a Snapshot
 
 Since your tools work as expected, you should now create a snapshot of your
-VM for later use. Please click on `Show Actions` and `Create Snapshot`.
+VM for later use. Before you do this, you should first stop your VM so that
+no data corruption appears. For this reason, please click on `Show Actions` and `Stop VM`. 
+Once your VM is stopped click on `Show Actions` and `Create Snapshot`.
 Please use your name without whitespace (Example: Max Mustermann -> MaxMusterman).
 The upload of your snapshot might take a few minutes.
 

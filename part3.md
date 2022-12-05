@@ -160,7 +160,10 @@ and scale up our analysis by providing more cores to mash.
    and inspect the cpu utilization with `htop`.
    ![](figures/htop.png)
 
-6. Concatenate all results into one file via `cat output/*.txt > output.tsv`
+6. Concatenate all results into one file via 
+   ```
+   cat output/*.txt > output.tsv
+   ```
 
 7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    ```
