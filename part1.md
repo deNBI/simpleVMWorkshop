@@ -33,7 +33,7 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
 3. In the image section, please click on the *Research Environments* tab 
    and select the **TheiaIDE-ubuntu1804** image.
    ![](./figures/theiaImage.png)
-4. Select the Conda tab and select the following tools for installation: 
+4. Select the Conda tab and choose the following tools for installation via Conda: 
    * ncbi-genome-download
    * mash
    * csvtk
@@ -43,6 +43,7 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
    ![](figures/bioconda.png)
    
    The filter in the name column can be used to search for the packages.
+   You will learn in the next sections how to apply these tools.
 
 4. Select a URL path for Theia. You will access Theia via this URL.
    ![](figures/researchenvironment_url.png)

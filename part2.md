@@ -1,9 +1,10 @@
 ## Section 2: Verify your VM properties and tools
 
-After the start of the machine has been triggered, some time may pass before the machine is available. As soon as this is the case, this becomes visible via a green icon.
+After the start of the machine has been triggered, some time may pass before the machine is available.
+As soon as this is the case, this becomes visible via a green icon.
 
-You can now use the VM you started in the first part for testing
-before you scale up your research workflow in the next part.
+Once the VM is available, you can use it for testing the tools and inspecting the data before
+you scale up your analysis in the next section.
 
 ### 2.1 Check your VM
 
@@ -35,7 +36,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    ```
    Exit `htop` by typing `q` or `F10`.
 
-4. Use the conda environment by running `conda activate denbi`.
+4. You can use the tools you selected in the previous part by running `conda activate denbi`.
 
 5. Test if the needed commands are installed by running all of them with -h parameter.
    You will get an explanation of their usage in the next chapter.
