@@ -1,4 +1,4 @@
-## Part 2: Verify your VM properties and tools
+## Section 2: Verify your VM properties and tools
 
 After the start of the machine has been triggered, some time may pass before the machine is available. As soon as this is the case, this becomes visible via a green icon.
 
@@ -102,4 +102,4 @@ The upload of your snapshot might take a few minutes.
 
 ![](figures/snapshot.png)
 
-Back to [Part 1](part1.md) | Next to [Part 3](part3.md)
+Back to [Section 1](part1.md) | Next to [Section 3](part3.md)

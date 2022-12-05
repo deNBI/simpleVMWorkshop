@@ -17,37 +17,39 @@ In order to find those microbes, you will have to interact with
 the de.NBI Cloud via SimpleVM. This workshop is divided into three
 parts.
 
-### Part 1: Big things start small  
+### Section 1: Big things start small  
 
 In the first part you will learn the basic concept of virtual machines
 and how to configure them.
 
-**[Go to the first part](part1.md)**
+**[Go to the first section](part1.md)**
 
-### Part 2: Verify your VM properties and tools
+### Section 2: Verify your VM properties and tools
 
 In the second part you will test whether SimpleVM correctly
 provisioned your VM with all your tools installed on it.
 
-**[Go to the second part](part2.md)**
+**[Go to the second section](part2.md)**
 
-### Part 3: Scale up your analysis 
+### Section 3: Scale up your analysis 
 
 In the second part you will learn about object storage and the 
 Sequence Read Archive. Further, you will run your analysis pipeline.
 
-**[Go to the third part](part3.md)**
+**[Go to the third section](part3.md)**
 
-### Part 4: Inspect your generated data via a research environment
+### Section 4: Inspect your generated data via a research environment
 
 In the last part you will start a virtual machine with a RStudio research
 environment installed.
 
-**[Go to the fourth part](part4.md)**
+**[Go to the fourth section](part4.md)**
 
-### Part 5: Use a cluster setup to further scale up your analysis
+### Section 5: Use a cluster setup to further scale up your analysis
 
 In this part you will use a SimpleVM Cluster to distribute your analysis 
 on multiple machines instead of just one.
 
-**[Go to the fourth part](part5.md)**
+**[Go to the fifths section (Part 1)](part51.md)**
+
+**[Go to the fifths section (Part 2)](part52.md)**

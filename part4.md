@@ -1,4 +1,4 @@
-## Part 4: Inspect your generated data via a research environment
+## Section 4: Inspect your generated data via a research environment
 
 We now want to start a new VM. This time we would like to use RStudio 
 in order to inspect and visualize our results.
@@ -67,4 +67,4 @@ and other providers who will generate a citable, stable Digital Object Identifie
 for your domain-specific research results.
 
 
-Back to [Part 3](part3.md) | Next to [Part 5](part5.md)
+Back to [Section 3](part3.md) | Next to [Section 5](part51.md)

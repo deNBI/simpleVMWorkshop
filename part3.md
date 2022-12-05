@@ -1,4 +1,4 @@
-## Part 3: Scale up your analysis
+## Section 3: Scale up your analysis
 
 In the first part you have tested the SimpleVM environment. Now it is time
 for using a VM with more cores to scale up the analysis. For this reason you 
@@ -202,4 +202,4 @@ and scale up our analysis by providing more cores to mash.
 
 12. Finally, since you saved your output data you can safely delete the VM.
 
-Back to [Part 2](part2.md) | Next to [Part 4](part4.md)
+Back to [Section 2](part2.md) | Next to [Section 4](part4.md)

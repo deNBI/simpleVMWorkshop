@@ -52,4 +52,4 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
    ![](figures/grantAccess.png)
 6. Confirm the checkboxes and click on Start.
 
-Next to [Part 2](part2.md)
+Next to [Section 2](part2.md)
