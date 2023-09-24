@@ -12,7 +12,7 @@ and scale up our analysis by providing more cores to mash.
 1. Click on `Overviews` -> `Snapshots` in left menu and check which status
    your snapshot has. You can also filter of the name in the top menu. 
    If it has the status `active`, you can 
-   navigate to the `New Instance` tab (and select the SimpleVMIntro2022 project).
+   navigate to the `New Instance` tab (and select the deNBISchool2023 project).
 
 2. Provide again a name for your instance.
 3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available. 
