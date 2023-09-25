@@ -50,6 +50,6 @@ environment installed.
 In this part you will use a SimpleVM Cluster to distribute your analysis 
 on multiple machines instead of just one.
 
-**[Go to the fifths section (Part 1)](part51.md)**
+**[Go to the fifth section (Part 1)](part51.md)**
 
-**[Go to the fifths section (Part 2)](part52.md)**
+**[Go to the fifth section (Part 2)](part52.md)**
