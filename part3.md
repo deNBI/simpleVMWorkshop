@@ -90,11 +90,13 @@ and scale up our analysis by providing more cores to mash.
       |  jq -s 'map(.size) | add'  \
       | numfmt --to=iec-i --suffix=B --padding=7
    ```
+
+   <details><summary>Show Explanation</summary>
    where
       * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
       *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
       * `numfmt` transforms the sum to a human-readable string.
-
+   </details>
 
 ### 3.3 Run commands with more cores and plot your result
 
@@ -133,11 +135,13 @@ and scale up our analysis by providing more cores to mash.
           | sed 's/\//\t/' > output/${sra_id}.txt ;
    }
    ```
+   <details><summary>Show Explanation</summary>
    In order to understand what this function does let's take the following datasets as an example:
-   ```
+   <code>
    sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz    sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz
-   ```
+   </code>
    where
+      
     * `left_read` is left file (`sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz`)
     * `right_read` is the right file (`sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz`)
     * `sra_id` is the prefix of the file name (`SRR6439511`)
@@ -145,6 +149,8 @@ and scale up our analysis by providing more cores to mash.
        to filter the datasets.
     * Both `sed`s are just post-processing the output and place every match in the `output` folder.
 
+   </details>
+   
    Export this function, so that we can use it in the next command.
    ```
    export -f search
@@ -156,24 +162,25 @@ and scale up our analysis by providing more cores to mash.
    where
      * `reads.tsv` is a list of datasets that we want to scan.
      * `search` is the function that we want to call.
-
-5. Optional: This command will run a few minutes. You could open a second terminal
+   
+   
+6. Optional: This command will run a few minutes. You could open a second terminal
    and inspect the cpu utilization with `htop`.
    ![](figures/htop.png)
 
-6. Concatenate all results into one file via 
+7. Concatenate all results into one file via 
    ```
    cat output/*.txt > output.tsv
    ```
 
-7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
+8. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    ```
    csvtk -t plot hist -H -f 3 output.tsv -o output.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf. 
    ![](figures/openpdf.png)
 
-8. Get the title and the environment name about the found datasets by using Entrez tools
+9. Get the title and the environment name about the found datasets by using Entrez tools
    ```
    for sraid in $(ls -1 output/ | cut -f 1 -d '.'); do  
      esearch -db sra -query ${sraid} \
@@ -183,27 +190,29 @@ and scale up our analysis by providing more cores to mash.
        | sed "s/^/${sraid}\t/g"; 
    done > publications.tsv
    ```
-   where
+    
+   <details><summary>Show Explanation</summary>
     * `for sraid in $(ls -1 output/ | cut -f 1 -d '.');` iterates over all datasets found in the output
       directory.
     * `esearch` just looks up the scientific name and title of the SRA study.
     * 'sed' adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
        the scientific name and the third column is the study title.
     * All results are stored the `publications.tsv` file.
+   </details>
 
-9. Set correct permissions on your volume:
+10. Set correct permissions on your volume:
    ```
    sudo chown ubuntu:ubuntu /vol/data/
    ```
 
-10. Copy your results to the volume for later use:
+11. Copy your results to the volume for later use:
     ```
     cp publications.tsv output.tsv /vol/data
     ```
 
-11. Go to the Instance Overview page. Click on actions and detach the volume.
+12. Go to the Instance Overview page. Click on actions and detach the volume.
     ![](figures/detachvolume.png)
 
-12. Finally, since you saved your output data you can safely delete the VM.
+13. Finally, since you saved your output data you can safely delete the VM.
 
 Back to [Section 2](part2.md) | Next to [Section 4](part4.md)
