@@ -92,10 +92,11 @@ and scale up our analysis by providing more cores to mash.
    ```
 
    <details><summary>Show Explanation</summary>
-   where
-      * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
-      *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
-      * `numfmt` transforms the sum to a human-readable string.
+      
+    * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
+    *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
+    * `numfmt` transforms the sum to a human-readable string.
+   
    </details>
 
 ### 3.3 Run commands with more cores and plot your result
