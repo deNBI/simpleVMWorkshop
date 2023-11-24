@@ -31,7 +31,7 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
 1. Choose a name for your VM.
 2. Select **de.NBI default**.
 3. In the image section, please click on the *Research Environments* tab 
-   and select the **TheiaIDE-ubuntu2204** image.
+   and select the **TheiaIDE-ubuntu22.04** image.
    ![](./figures/theiaImage.png)
 4. Select the Conda tab and choose the following tools with their version numbers as shown in the following screenshot for installation via Conda:
    * ncbi-genome-download
