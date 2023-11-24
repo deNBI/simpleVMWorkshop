@@ -19,8 +19,10 @@ In the following you will configure a cluster and submit your tools to a SLURM j
 3. The worker nodes will run the actual tools, so we need a flavor wir more cores then the one
    that the master node is using. Therefore, please select *de.NBI large* as flavor and start
    two worker nodes by providing `2` as the worker count.
+      ![](./figures/batch_worker.png)
 
-4. Now click on Start! That's it! Just with a few clicks you started your own cluster.
+
+5. Now click on Start! That's it! Just with a few clicks you started your own cluster.
 
 
 Back to [Section 4](part4.md) | Next to [Section 5 (Part 2)](part52.md)
