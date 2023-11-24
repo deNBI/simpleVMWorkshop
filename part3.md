@@ -17,7 +17,7 @@ and scale up our analysis by providing more cores to mash.
 
 2. Provide again a name for your instance.
 3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available.
-   ![](figures/large_flavor.png)
+   ![](figures/large_flavor.PNG)
 
    Click on the Snapshot tab to select the snapshot **SimpleVMIntro23**.
    ![](figures/startsnap.png)
