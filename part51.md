@@ -13,7 +13,7 @@ In the following you will configure a cluster and submit your tools to a SLURM j
    If you can not see the "New Cluster" item then reload the page.
 
 2. Since your master node is just used for submitting jobs, please select *de.NBI mini* as flavor and
-   the snapshot you created in the previous parts as image.
+   the snapshot **SimpleVMIntro23** as image.
    ![](./figures/clusterMasterImage.png)
    The same snapshot will also be used for all worker nodes.
 3. The worker nodes will run the actual tools, so we need a flavor wir more cores then the one
