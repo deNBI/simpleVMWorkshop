@@ -8,7 +8,7 @@ in order to inspect and visualize our results.
 1. Start a new VM. This time select again the de.NBI default flavor since
    we do not need that much resources anymore.
 
-2. In the image tab please select Rstudio (`RStudio-ubuntu2204`).
+2. In the image tab please select Rstudio (`RStudio-ubuntu22.04`).
    
 3. In the volume tab please choose the volume you created
    in the previous part of the workshop.
