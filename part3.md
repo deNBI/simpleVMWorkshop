@@ -16,21 +16,23 @@ and scale up our analysis by providing more cores to mash.
    navigate to the `New Instance` tab (and select the SimpleVMIntro23 project).
 
 2. Provide again a name for your instance.
-3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available. 
+3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available.
+   ![](figures/large_flavor.png)
+
    Click on the Snapshot tab to select the snapshot **SimpleVMIntro23**.
    ![](figures/startsnap.png)
 
-4. Please create a volume for your VM and enter your name without whitespace 
+5. Please create a volume for your VM and enter your name without whitespace 
    (Example: Max Mustermann -> MaxMusterman) as the volume name. 
    Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
    ![](figures/createVolume.png)
 
-5. Grant again access to all project members with a `Cloud-portal-support` tag.
+6. Grant again access to all project members with a `Cloud-portal-support` tag.
    This way these members get ssh access to your VM and can help you in case
    something does not work as expected.
    ![](figures/grantAccess.png)
 
-6. Confirm the checkboxes and click on Start.
+7. Confirm the checkboxes and click on Start.
    While the VM is starting please fill out our [user survey](https://cloud.denbi.de/survey/index.php/638945?lang=en).
 
 ### 3.2 Interact with the SRA Mirror and search for more datasets to analyse
