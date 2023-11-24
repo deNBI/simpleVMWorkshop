@@ -24,7 +24,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
    ```
    Does that correspond to the actual number of cores of the flavor you selected?
    `free -h` tells you the amount of RAM that is available to your VM. You will see
-   that the sum of the total amount of Mem (first column, second row) corresponds 
+   that the sum of the total amount of Mem (`total` column, `Mem` row) corresponds 
    roughly to the RAM size of your selected flavor.
    ```
    free -h
