@@ -16,11 +16,15 @@ Please make sure to to click on “continue” if this button shows up.
 If you successfully registered for a de.NBI Cloud account,
 you should be able to log in to the de.NBI Cloud Portal: https://cloud.denbi.de/portal/.
 
-### 1.2 Set an SSH key in your account
+### 1.2 Select the SimpleVMIntro23 project
 
 1. Click on the `New Instance` tab.
 
-2. If you have no SSH key set so far, just click on generate key and save the
+2. If you are already member of a SimpleVM project then you are offered a drop down menu to select
+a project. In this case please select the **SimpleVMIntro23** project. If this is
+your first SimpleVM project, you are now able to select/generate a key (next point) or directly start a VM.
+
+3. If you have no SSH key set so far, just click on generate key and save the
 private key. During this workshop you will not need this file because 
 you will access all VMs via the browser. However, for your future work using
 SimpleVM, we highly recommend to read our de.NBI Cloud wiki regarding
