@@ -123,28 +123,29 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
 ### 5.3 Scan the SRA for genomes
 
 1. We can now reuse the `search` function of the third part of this tutorial and
-submit an array job with the number of datasets we want to scan.
+submit an array job with the number of datasets we want to scan. Remember the search function
+searches a list of genomes in a list of metagenomic datasets. 
 
 Please download the updated script by using wget:
 ```
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
 ```
-
+<details><summary>Show Explanation</summary>
 This is the content of the script
-```
+<code>
 #!/bin/bash
 
-# Create an output directory
+#Create an output directory
 mkdir output_final
 
-# Use the conda environment you installed in your snapshot and activate it
+#Use the conda environment you installed in your snapshot and activate it
 eval "$(conda shell.bash hook)"
 conda activate denbi
 
-# Add S3 SRA OpenStack Config
+#Add S3 SRA OpenStack Config
 /vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
 
-# Define search function you have already used in part 3
+#Define search function you have already used in part 3
 search(){
    left_read=$(echo $1 | cut -d ' '  -f 1);  
    right_read=$(echo $1 | cut -d ' ' -f 2);
@@ -154,13 +155,14 @@ search(){
         | sed 's/\//\t/' > output_final/${sra_id}.txt ;
 }
 
-# Create a variable for the array task id
+#Create a variable for the array task id
 LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
 LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
 
-# Search for the datasets
+#Search for the datasets
 search ${LINE} 
-```
+</code>
+</details>
 
 2. The input for the script is a file containing fastq datasets (`reads.tsv`) and
 a file containing a sketch of the genomes.
