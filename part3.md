@@ -1,10 +1,11 @@
 ## Section 3: Scale up your analysis
 
-In the first part you have tested the SimpleVM environment. Now it is time
-for using a VM with more cores to scale up the analysis. For this reason you 
-saved your installed tools by creating a snapshot. You will now reuse
-this snapshot with a larger flavor.
-Further, we will search for more metagenomic datasets via object storage
+In the first part you have tested the SimpleVM environment. 
+Now it is time for using a VM with more cores to scale up the analysis. 
+For this reason you have either saved your installed tools by creating a snapshot or, 
+if you are starting with this section, a snapshot has been prepared for you. 
+You will now reuse one of these snapshots with a larger flavor.
+Further, we will alos search for more metagenomic datasets via object storage
 and scale up our analysis by providing more cores to mash.
 
 ### 3.1 Create a new VM based on your snapshot
