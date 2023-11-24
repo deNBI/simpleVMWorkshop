@@ -37,13 +37,13 @@ SSH keys: https://cloud.denbi.de/wiki/portal/user_information/#ssh-key
 3. In the image section, please click on the *Research Environments* tab 
    and select the **TheiaIDE-ubuntu22.04** image.
    ![](./figures/theiaImage.png)
-4. Select the Conda tab and choose the following tools with their version numbers as shown in the following screenshot for installation via Conda:
-   * ncbi-genome-download
-   * mash
-   * csvtk
-   * entrez-direct
-   * jq
-   * parallel
+4. Select the Conda tab and choose the following tools with their version numbers given below for installation via Conda:
+   * ncbi-genome-download (0.3.3)
+   * mash (2.2)
+   * csvtk (0.28.0)
+   * entrez-direct (16.2)
+   * jq (1.6)
+   * parallel (20230922)
    ![](figures/bioconda.png)
    
    The filter in the name column can be used to search for the packages.
