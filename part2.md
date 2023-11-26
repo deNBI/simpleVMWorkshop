@@ -51,11 +51,18 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
 6. Remember that you have root permissions on the VM. You can install any
    tool that you need for your research.
-   Let's test this statement by installing the following commands via `sudo`.
+   Let's test this statement by first fetching the latest information about available packages and installing the following commands (`fortune-mod`, `cowsay`) via `sudo`.
+
+   Update:
+   ```
+   sudo apt update
+   ```
+
+   Install the commands:
    ```
    sudo apt install -y fortune-mod cowsay
    ```
-   and run both commands via
+   You can run both commands via
    ```
    /usr/games/fortune | /usr/games/cowsay 
    ```
